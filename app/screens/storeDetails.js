@@ -36,6 +36,13 @@ export default class StoreDetail extends React.Component {
     this.props.navigation.push('StoreDetails', item);
   }
 
+  delete() {
+    const { navigation } = this.props;
+    const storeId = navigation.getParam('id', 'NO-ID');
+    fetch(`${settings.apiUrl}stores/${storeId}`, {method: 'DELETE'})
+    .then(() => this.props.navigation.goBack());
+  }
+
   render(){
     if (this.state.isLoading) {
       return(
@@ -48,7 +55,8 @@ export default class StoreDetail extends React.Component {
     return (
       <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
         <Text style={{fontSize: 24}}>{this.state.store.name}</Text>
-        <View style={{flexDirection: 'row', height: 30}}>
+        <View style={{flexDirection: 'row', height: 30, alignItems: 'stretch'}}>
+          <Button title='Delete' onPress={() => this.delete()} />
         </View>
         <View>
           <Text style={{fontSize: 21}}>Branches</Text>
