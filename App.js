@@ -1,7 +1,12 @@
 import React from 'react';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
 
-export default class StoresList extends React.Component {
+
+class StoresList extends React.Component {
+  static navigationOptions = {
+    title: 'Stores',
+  };
 
   constructor(props){
     super(props);
@@ -33,15 +38,12 @@ export default class StoresList extends React.Component {
     }
 
     return(
-      <View style={{flex: 1, flexDirection: 'column', paddingTop: 20}}>
-        <Text style={{fontSize: 24}}>Stores:</Text>
-        <View style={{paddingTop:20}}>
-          <FlatList
-            data={this.state.dataSource}
-            renderItem={({item}) => <Store name={item.name} branches={item.branches} />}
-            keyExtractor={({id}, index) => id.toString()}
-          />
-        </View>
+      <View>
+        <FlatList
+          data={this.state.dataSource}
+          renderItem={({item}) => <Store name={item.name} branches={item.branches} />}
+          keyExtractor={({id}, index) => id.toString()}
+        />
       </View>
     );
   }
@@ -61,3 +63,12 @@ class Store extends React.Component {
     )
   }
 }
+
+
+const MainNavigator = createStackNavigator({
+  Home: {screen: StoresList}
+});
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
