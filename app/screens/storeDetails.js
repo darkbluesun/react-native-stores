@@ -3,6 +3,11 @@ import settings from '../config/settings';
 import Store from '../components/Store';
 import { ActivityIndicator, FlatList, Text, View, Button  } from 'react-native';
 
+const handleErrors = function(response) {
+  if (!response.ok) throw Error(response.statusText);
+  return response;
+}
+
 export default class StoreDetail extends React.Component {
   static navigationOptions = {
     title: 'Store details',
@@ -17,9 +22,11 @@ export default class StoreDetail extends React.Component {
     const { navigation } = this.props;
     const storeId = navigation.getParam('id', 'NO-ID');
     return fetch(`${settings.apiUrl}stores/${storeId}`)
+      .then(handleErrors)
       .then(response => response.json())
       .then(store => {this.setState({store})})
       .then(() => fetch(`${settings.apiUrl}stores/${storeId}/branches`))
+      .then(handleErrors)
       .then(response => response.json())
       .then(store => {this.setState({isLoading: false, store})})
       .catch(error => { console.error(error) });

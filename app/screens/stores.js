@@ -3,6 +3,11 @@ import settings from '../config/settings';
 import Store from '../components/Store';
 import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
 
+const handleErrors = function(response) {
+  if (!response.ok) throw Error(response.statusText);
+  return response;
+}
+
 export default class StoresList extends React.Component {
   static navigationOptions = {
     title: 'Stores',
@@ -15,6 +20,7 @@ export default class StoresList extends React.Component {
 
   componentDidMount(){
     return fetch(settings.apiUrl + 'stores')
+      .then(handleErrors)
       .then((response) => response.json())
       .then((dataSource) => {
 
