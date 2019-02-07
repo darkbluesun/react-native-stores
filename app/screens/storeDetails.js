@@ -1,6 +1,7 @@
 import React from 'react';
 import settings from '../config/settings';
 import Store from '../components/Store';
+import ConfirmModal from '../components/confirm';
 import { ActivityIndicator, FlatList, Text, View, Button  } from 'react-native';
 
 const handleErrors = function(response) {
@@ -56,7 +57,7 @@ export default class StoreDetail extends React.Component {
       <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
         <Text style={{fontSize: 24}}>{this.state.store.name}</Text>
         <View style={{flexDirection: 'row', height: 30, alignItems: 'stretch'}}>
-          <Button title='Delete' onPress={() => this.delete()} />
+          <ConfirmModal color='red' label='Delete' title={`Delete ${this.state.store.name}`} handleClick={() => this.delete()} />
         </View>
         <View>
           <Text style={{fontSize: 21}}>Branches</Text>
