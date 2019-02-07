@@ -28,6 +28,10 @@ export default class StoresList extends React.Component {
       });
   }
 
+  handleClick(item) {
+    this.props.navigation.navigate('StoreDetails', item);
+  }
+
   render(){
     if(this.state.isLoading){
       return(
@@ -41,7 +45,13 @@ export default class StoresList extends React.Component {
       <View>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <Store name={item.name} branches={item.branches} />}
+          renderItem={({item}) =>
+            <Store
+              id={item.id}
+              name={item.name}
+              branches={item.branches}
+              handleClick={item => this.handleClick(item)}
+            />}
           keyExtractor={({id}, index) => id.toString()}
         />
       </View>
