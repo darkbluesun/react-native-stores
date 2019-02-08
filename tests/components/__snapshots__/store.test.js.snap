@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component.Store renders correctly 1`] = `
+<View>
+  <Text
+    onPress={[Function]}
+  >
+    - 
+    Root Store
+  </Text>
+</View>
+`;
