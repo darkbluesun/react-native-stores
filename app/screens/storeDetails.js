@@ -2,7 +2,7 @@ import React from 'react';
 import settings from '../config/settings';
 import Store from '../components/Store';
 import ConfirmModal from '../components/confirm';
-import { ActivityIndicator, FlatList, Text, View, Button  } from 'react-native';
+import { ActivityIndicator, FlatList, TextInput, Text, View, Button  } from 'react-native';
 
 const handleErrors = function(response) {
   if (!response.ok) throw Error(response.statusText);
@@ -20,13 +20,11 @@ export default class StoreDetail extends React.Component {
   }
 
   componentDidMount(){
-    const { navigation } = this.props;
-    const storeId = navigation.getParam('id', 'NO-ID');
-    return fetch(`${settings.apiUrl}stores/${storeId}`)
+    return fetch(`${settings.apiUrl}stores/${this.storeId}`)
       .then(handleErrors)
       .then(response => response.json())
       .then(store => {this.setState({store})})
-      .then(() => fetch(`${settings.apiUrl}stores/${storeId}/branches`))
+      .then(() => fetch(`${settings.apiUrl}stores/${this.storeId}/branches`))
       .then(handleErrors)
       .then(response => response.json())
       .then(store => {this.setState({isLoading: false, store})})
@@ -37,10 +35,21 @@ export default class StoreDetail extends React.Component {
     this.props.navigation.push('StoreDetails', item);
   }
 
+  storeId = this.props.navigation.getParam('id', 'NO-ID');
+
+  updateName = name => {
+    fetch(`${settings.apiUrl}stores/${this.storeId}`,
+      {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name})
+      })
+    .then(response => response.json())
+    .then(store => this.setState({store}))
+  }
+
   delete() {
-    const { navigation } = this.props;
-    const storeId = navigation.getParam('id', 'NO-ID');
-    fetch(`${settings.apiUrl}stores/${storeId}`, {method: 'DELETE'})
+    fetch(`${settings.apiUrl}stores/${this.storeId}`, {method: 'DELETE'})
     .then(() => this.props.navigation.goBack());
   }
 
@@ -55,7 +64,11 @@ export default class StoreDetail extends React.Component {
 
     return (
       <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
-        <Text style={{fontSize: 24}}>{this.state.store.name}</Text>
+        <TextInput
+          onChangeText={name => this.updateName(name)}
+          style={{fontSize: 24}}
+          value={this.state.store.name}
+        />
         <View style={{flexDirection: 'row', height: 30, alignItems: 'stretch'}}>
           <ConfirmModal color='red' label='Delete' title={`Delete ${this.state.store.name}`} handleClick={() => this.delete()} />
         </View>
