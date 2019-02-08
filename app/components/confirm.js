@@ -1,6 +1,6 @@
 import React from 'react';
 import settings from '../config/settings';
-import { ActivityIndicator, Modal, Text, View, Button  } from 'react-native';
+import { Modal, Text, View, Button  } from 'react-native';
 
 export default class ConfirmModal extends React.Component {
   state = {
@@ -33,13 +33,13 @@ export default class ConfirmModal extends React.Component {
                 <View style={{flexDirection: 'column', alignItems: 'stretch'}}>
                   <Button
                     style={{flex: 1}}
-                    title="No, dont"
+                    title="No, don't"
                     onPress={() => {this.setModalVisible(false)}} />
                   <Button
                     style={{flex: 1}}
                     color={this.props.color}
                     title={this.props.label}
-                    onPress={() => this.props.handleClick()} />
+                    onPress={() => this.props.handleClick().then(() => this.setModalVisible(false))} />
                 </View>
               </View>
             </View>

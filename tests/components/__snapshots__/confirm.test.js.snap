@@ -133,7 +133,7 @@ exports[`component.ConfirmModal renders correctly 1`] = `
                   ]
                 }
               >
-                No, dont
+                No, don't
               </Text>
             </View>
           </View>
