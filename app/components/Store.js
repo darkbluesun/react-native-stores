@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
+import { FlatList, Text, View  } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class Store extends React.Component {
   store = {id: this.props.id, name: this.props.name}
@@ -17,9 +18,16 @@ export default class Store extends React.Component {
               branches={item.branches}
               handleClick={item => this.props.handleClick(item)}
             />}
-          keyExtractor={({id}, index) => id.toString()}
+          keyExtractor={({id}) => id.toString()}
         />
       </View>
     )
   }
+}
+
+Store.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  handleClick: PropTypes.func,
+  branches: PropTypes.array
 }

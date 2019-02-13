@@ -2,7 +2,7 @@ import React from 'react';
 import settings from '../config/settings';
 import Store from '../components/Store';
 import ConfirmModal from '../components/confirm';
-import { ActivityIndicator, FlatList, TextInput, Text, View, Button  } from 'react-native';
+import { ActivityIndicator, FlatList, TextInput, Text, View } from 'react-native';
 
 const handleErrors = function(response) {
   if (!response.ok) throw Error(response.statusText);
@@ -83,7 +83,7 @@ export default class StoreDetail extends React.Component {
                 branches={item.branches}
                 handleClick={item => this.handleClick(item)}
               />}
-            keyExtractor={({id}, index) => id.toString()}
+            keyExtractor={({id}) => id.toString()}
           />
         </View>
       </View>

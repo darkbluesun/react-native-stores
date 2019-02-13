@@ -1,6 +1,6 @@
 import React from 'react';
-import settings from '../config/settings';
 import { Modal, Text, View, Button  } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class ConfirmModal extends React.Component {
   state = {
@@ -47,4 +47,11 @@ export default class ConfirmModal extends React.Component {
         </View>
     )
   }
+}
+
+ConfirmModal.propTypes = {
+  color: PropTypes.string,
+  label: PropTypes.string,
+  title: PropTypes.string,
+  handleClick: PropTypes.func
 }
