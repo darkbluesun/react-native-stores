@@ -23,14 +23,14 @@ npm install -g expo-cli
 Then, to fire it up, just run (in the project dir):
 
 ```
-yarn
-yarn start
+npm i
+npm start
 ```
 
 Tests:
 
 ```
-yarn test
+npm test
 
 ```
 
