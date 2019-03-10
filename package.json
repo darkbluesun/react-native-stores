@@ -8,7 +8,12 @@
     "test": "jest"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "jest-react-native",
+    "collectCoverageFrom": [
+      "app/**/*{js,jsx}",
+      "*.{js,jsx}",
+      "!*config*.js"
+    ]
   },
   "dependencies": {
     "expo": "^32.0.0",
