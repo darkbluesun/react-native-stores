@@ -1,37 +1,24 @@
 import React from 'react';
-import settings from '../config/settings';
 import Store from '../components/Store';
+import settings from '../config/settings';
 import { FlatList, ActivityIndicator, View  } from 'react-native';
 
 const handleErrors = function(response) {
   if (!response.ok) throw Error(response.statusText);
   return response;
 }
-
 export default class StoresList extends React.Component {
-  static navigationOptions = {
-    title: 'Stores',
-  };
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={ isLoading: true }
   }
 
   componentDidMount(){
+    this.props.getStores();
     return fetch(settings.apiUrl + 'stores')
       .then(handleErrors)
       .then((response) => response.json())
-      .then((dataSource) => {
-
-        this.setState({
-          isLoading: false,
-          dataSource,
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+      .then(stores => this.props.gotStores(stores))
+      .catch(error => console.error(error));
   }
 
   handleClick(item) {
@@ -39,18 +26,19 @@ export default class StoresList extends React.Component {
   }
 
   render(){
-    if(this.state.isLoading){
+    if(this.props.loading){
       return(
         <View style={{flex: 1, padding: 20}}>
           <ActivityIndicator/>
         </View>
       )
     }
+  
 
     return(
       <View>
         <FlatList
-          data={this.state.dataSource}
+          data={this.props.stores}
           renderItem={({item}) =>
             <Store
               id={item.id}

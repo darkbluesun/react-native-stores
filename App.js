@@ -1,10 +1,10 @@
 import React from 'react';
-import StoresList from './app/screens/stores';
+import Main from './app/screens/Main';
 import StoreDetails from './app/screens/storeDetails';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 const MainNavigator = createStackNavigator({
-  Home: {screen: StoresList},
+  Home: {screen: Main},
   StoreDetails: {screen: StoreDetails}
 });
 
