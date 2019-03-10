@@ -1,13 +1,31 @@
 import React from 'react';
-import Main from './app/screens/Main';
-import StoreDetails from './app/screens/storeDetails';
+import { Provider } from 'react-redux';
+import { configureStore } from 'redux-starter-kit';
+import stores from './app/reducers/stores';
+import store from './app/reducers/store';
+import StoresList from './app/containers/stores';
+import StoreDetails from './app/containers/storeDetails';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 const MainNavigator = createStackNavigator({
-  Home: {screen: Main},
-  StoreDetails: {screen: StoreDetails}
+  Home: StoresList,
+  StoreDetails: StoreDetails,
 });
 
-const App = createAppContainer(MainNavigator);
+const Navigation = createAppContainer(MainNavigator);
 
-export default App;
+export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.store = configureStore({
+        reducer: { stores, store }
+    });
+  }
+  render() {
+    return (
+      <Provider store={this.store}>
+        <Navigation />
+      </Provider>
+    );
+  }
+}

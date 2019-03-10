@@ -16,24 +16,32 @@ export default class StoreDetail extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ isLoading: true }
+    this.state = {
+      store: {name: props.store.name}
+    };
   }
 
   componentDidMount(){
+    this.props.getStore();
     return fetch(`${settings.apiUrl}stores/${this.storeId}`)
       .then(handleErrors)
       .then(response => response.json())
-      .then(store => {this.setState({store})})
+      .then(store => this.props.gotStore(store))
       .then(() => fetch(`${settings.apiUrl}stores/${this.storeId}/branches`))
       .then(handleErrors)
       .then(response => response.json())
-      .then(store => {this.setState({isLoading: false, store})})
+      .then(store => {this.props.gotStore(store)})
       .catch(error => { console.error(error) });
   }
 
   storeId = this.props.navigation.getParam('id', 'NO-ID');
 
-  updateName = name => {
+  editName = name => {
+    this.setState({store: {name}});
+  }
+
+  updateName = e => {
+    const name = e.nativeEvent.text;
     fetch(`${settings.apiUrl}stores/${this.storeId}`,
       {
         method: 'PUT',
@@ -54,7 +62,7 @@ export default class StoreDetail extends React.Component {
   }
 
   render(){
-    if (this.state.isLoading) {
+    if (this.props.loading) {
       return(
         <View style={{flex: 1, padding: 20}}>
           <ActivityIndicator/>
@@ -65,17 +73,18 @@ export default class StoreDetail extends React.Component {
     return (
       <View style={{flex: 1, flexDirection: 'column', alignItems: 'center'}}>
         <TextInput
-          onChangeText={name => this.updateName(name)}
+          onChangeText={name => this.editName(name)}
+          onSubmitEditing={name => this.updateName(name)}
           style={{fontSize: 24}}
           value={this.state.store.name}
         />
         <View style={{flexDirection: 'row', height: 30, alignItems: 'stretch'}}>
-          <ConfirmModal color='red' label='Delete' title={`Delete ${this.state.store.name}`} handleClick={() => this.delete()} />
+          <ConfirmModal color='red' label='Delete' title={`Delete ${this.props.store.name}`} handleClick={() => this.delete()} />
         </View>
         <View>
           <Text style={{fontSize: 21}}>Branches</Text>
           <FlatList
-            data={this.state.store.branches}
+            data={this.props.store.branches}
             renderItem={({item}) =>
               <Store
                 id={item.id}
