@@ -31,10 +31,6 @@ export default class StoreDetail extends React.Component {
       .catch(error => { console.error(error) });
   }
 
-  handleClick(item) {
-    this.props.navigation.push('StoreDetails', item);
-  }
-
   storeId = this.props.navigation.getParam('id', 'NO-ID');
 
   updateName = name => {
@@ -46,6 +42,10 @@ export default class StoreDetail extends React.Component {
       })
     .then(response => response.json())
     .then(store => this.setState({store}))
+  }
+
+  handleClick(item) {
+    this.props.navigation.push('StoreDetails', item);
   }
 
   delete() {
