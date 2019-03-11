@@ -31,11 +31,24 @@ describe('screen.store', function() {
         }
         wrapper = renderer.create(
             <StoreDetails
+                getStore={jest.fn()}
+                gotStore={jest.fn()}
+                store={store}
+                loading={false}
                 navigation={navigation}
             />
         );
     });
     it('shows loader', () => {
+        wrapper = renderer.create(
+            <StoreDetails
+                getStore={jest.fn()}
+                gotStore={jest.fn()}
+                store={store}
+                loading
+                navigation={navigation}
+            />
+        );
         expect(wrapper.toJSON()).toMatchSnapshot();
     });
     test('renders correctly', function(done) {
@@ -54,7 +67,7 @@ describe('screen.store', function() {
     });
     test('updates the name', function(done) {
         process.nextTick(() => {
-            wrapper.root.findByType(TextInput).props.onChangeText('steve');
+            wrapper.root.findByType(TextInput).props.onSubmitEditing({nativeEvent: {text: 'steve'}});
             expect(global.fetch).toHaveBeenCalledWith(`${settings.apiUrl}stores/1`, {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: '{"name":"steve"}'});
             done();
         });

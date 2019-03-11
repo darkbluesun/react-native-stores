@@ -13,6 +13,7 @@ exports[`screen.store renders correctly 1`] = `
   <TextInput
     allowFontScaling={true}
     onChangeText={[Function]}
+    onSubmitEditing={[Function]}
     style={
       Object {
         "fontSize": 24,

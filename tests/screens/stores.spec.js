@@ -18,10 +18,25 @@ describe('screen.stores', function() {
             navigate: jest.fn(),
         };
         wrapper = renderer.create(
-            <StoresList navigation={navigation}></StoresList>
+            <StoresList
+                navigation={navigation}
+                getStores={jest.fn()}
+                gotStores={jest.fn()}
+                loading={false}
+                stores={storesList}
+            />
         );
     })
     it('shows loader', () => {
+        wrapper = renderer.create(
+            <StoresList
+                navigation={navigation}
+                getStores={jest.fn()}
+                gotStores={jest.fn()}
+                loading
+                stores={storesList}
+            />
+        );
         expect(wrapper.toJSON()).toMatchSnapshot();
     })
     test('renders correctly', function(done) {
