@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions.stores should generate GET_STORE 1`] = `
+Object {
+  "type": "GET_STORE",
+}
+`;
+
+exports[`actions.stores should generate GET_STORES 1`] = `
+Object {
+  "type": "GET_STORES",
+}
+`;
+
+exports[`actions.stores should generate GOT_STOERS 1`] = `
+Object {
+  "payload": Object {
+    "stores": Array [
+      Object {
+        "name": "store 1",
+      },
+    ],
+  },
+  "type": "GOT_STORES",
+}
+`;
+
+exports[`actions.stores should generate GOT_STORE 1`] = `
+Object {
+  "payload": Object {
+    "store": Object {
+      "name": "store 1",
+    },
+  },
+  "type": "GOT_STORE",
+}
+`;

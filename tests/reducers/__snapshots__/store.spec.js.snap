@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducer.store should GET_STORE 1`] = `
+Object {
+  "loading": true,
+  "store": Object {},
+}
+`;
+
+exports[`reducer.store should GOT_STORE 1`] = `
+Object {
+  "loading": false,
+  "store": Object {
+    "name": "new store",
+  },
+}
+`;
