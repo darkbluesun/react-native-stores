@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getStores should handle failure 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/stores",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "ok": false,
+          "statusText": "404 Not Found",
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStores should handle failure 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "error": [Error: 404 Not Found],
+    },
+    "type": "GET_STORES_FAIL",
+  },
+]
+`;
+
+exports[`getStores should handle success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/stores",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "json": [Function],
+          "ok": true,
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStores should handle success 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "stores": Array [
+        Object {
+          "id": 1,
+          "name": "new store 1",
+        },
+      ],
+    },
+    "type": "GOT_STORES",
+  },
+]
+`;
