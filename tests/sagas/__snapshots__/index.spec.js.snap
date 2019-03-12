@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rootSaga should yield all sagas 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": true,
+  "payload": Array [
+    GeneratorFunctionPrototype {
+      "_invoke": [Function],
+    },
+  ],
+  "type": "ALL",
+}
+`;

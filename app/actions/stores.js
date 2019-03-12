@@ -2,7 +2,8 @@ import {
     GET_STORES,
     GOT_STORES,
     GET_STORE,
-    GOT_STORE
+    GOT_STORE,
+    GET_STORES_FAIL
 } from '../constants/actiontypes';
 
 export const getStores = () => ({
@@ -13,6 +14,11 @@ export const gotStores = stores => ({
     type: GOT_STORES,
     payload: { stores },
 });
+
+export const getStoresFail = error => ({
+    type: GET_STORES_FAIL,
+    payload: { error },
+})
 
 export const getStore = () => ({
     type: GET_STORE,
