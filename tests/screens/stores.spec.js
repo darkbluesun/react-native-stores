@@ -8,11 +8,6 @@ jest.mock('ScrollView', () => require.requireMock('ScrollViewMock'))
 describe('screen.stores', function() {
     var navigation, wrapper;
     const storesList = [{id: 1, name: 'first store', branches: []}];
-    const mockPromise = Promise.resolve({
-        ok: true,
-        json: () => storesList
-    })
-    jest.spyOn(global, 'fetch').mockImplementation(() => mockPromise);
     beforeEach(() => {
         navigation = {
             navigate: jest.fn(),
@@ -21,7 +16,6 @@ describe('screen.stores', function() {
             <StoresList
                 navigation={navigation}
                 getStores={jest.fn()}
-                gotStores={jest.fn()}
                 loading={false}
                 stores={storesList}
             />
@@ -32,25 +26,17 @@ describe('screen.stores', function() {
             <StoresList
                 navigation={navigation}
                 getStores={jest.fn()}
-                gotStores={jest.fn()}
                 loading
                 stores={storesList}
             />
         );
         expect(wrapper.toJSON()).toMatchSnapshot();
     })
-    test('renders correctly', function(done) {
-        process.nextTick(() => {
-            expect(wrapper.toJSON()).toMatchSnapshot();
-            global.fetch.mockClear();
-            done();
-        });
+    test('renders correctly', function() {
+        expect(wrapper.toJSON()).toMatchSnapshot();
     });
-    test('navigates to details', (done) => {
-        process.nextTick(() => {
-            wrapper.root.findByType('Text').props.onPress();
-            expect(navigation.navigate).toHaveBeenCalled();
-            done();
-        });
+    test('navigates to details', () => {
+        wrapper.root.findByType('Text').props.onPress();
+        expect(navigation.navigate).toHaveBeenCalled();
     })
 });
