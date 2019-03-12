@@ -1,4 +1,4 @@
-import { getStores, gotStores } from "../actions/stores";
+import { getStores } from "../actions/stores";
 import { connect } from 'react-redux';
 import StoresList from '../screens/stores';
 
@@ -9,7 +9,6 @@ const matchStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
     getStores: () => dispatch(getStores()),
-    gotStores: payload => dispatch(gotStores(payload)),
 });
 
 export default connect(matchStateToProps, mapDispatchToProps)(StoresList);
