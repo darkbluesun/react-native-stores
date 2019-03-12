@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`root reducer should reduce the reducers to one reducer 1`] = `
+Object {
+  "stores": Object {
+    "loading": true,
+    "stores": Array [],
+  },
+}
+`;
