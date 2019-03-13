@@ -1,6 +1,8 @@
 import 'isomorphic-fetch';
 import { runSaga } from "redux-saga";
-import { getStore, getStoreBranchesSaga } from '../../app/sagas/storeDetails';
+import { getStore, getStoreBranchesSaga, watchGetBranches } from '../../app/sagas/storeDetails';
+import { GET_STORE_BRANCHES } from '../../app/constants/actiontypes';
+import { takeLatest } from 'redux-saga/effects';
 
 describe('getStore', () => {
   const store = {id: 1, name: 'store 1'};
@@ -71,5 +73,9 @@ describe('getStoreBranches', () => {
     expect(global.fetch).toMatchSnapshot();
     expect(dispatched).toMatchSnapshot();
     global.fetch.mockClear();
+  });
+  test('should wait for GET_STORE_BRANCHES', () => {
+    const saga = watchGetBranches();
+    expect(saga.next().value).toEqual(takeLatest(GET_STORE_BRANCHES, getStoreBranchesSaga))
   });
 })
