@@ -4,11 +4,6 @@ import Store from '../components/Store';
 import ConfirmModal from '../components/confirm';
 import { ActivityIndicator, FlatList, TextInput, Text, View } from 'react-native';
 
-const handleErrors = function(response) {
-  if (!response.ok) throw Error(response.statusText);
-  return response;
-}
-
 export default class StoreDetail extends React.Component {
   static navigationOptions = {
     title: 'Store details',
@@ -22,16 +17,7 @@ export default class StoreDetail extends React.Component {
   }
 
   componentDidMount(){
-    this.props.getStore();
-    return fetch(`${settings.apiUrl}stores/${this.storeId}`)
-      .then(handleErrors)
-      .then(response => response.json())
-      .then(store => this.props.gotStore(store))
-      .then(() => fetch(`${settings.apiUrl}stores/${this.storeId}/branches`))
-      .then(handleErrors)
-      .then(response => response.json())
-      .then(store => {this.props.gotStore(store)})
-      .catch(error => { console.error(error) });
+    this.props.getStore(this.storeId);
   }
 
   storeId = this.props.navigation.getParam('id', 'NO-ID');

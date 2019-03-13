@@ -18,13 +18,9 @@ describe('screen.store', function() {
             { id: 2, name: 'second store', branches: [] },
         ],
     };
-    const mockPromise = Promise.resolve({
-        ok:  true,
-        json: () => store
-    })
     
     beforeEach(() => {
-        jest.spyOn(global, 'fetch').mockImplementation(() => mockPromise);
+        jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({}));
         navigation = {
             getParam: () => 1,
             push: jest.fn()
@@ -32,7 +28,6 @@ describe('screen.store', function() {
         wrapper = renderer.create(
             <StoreDetails
                 getStore={jest.fn()}
-                gotStore={jest.fn()}
                 store={store}
                 loading={false}
                 navigation={navigation}
@@ -43,7 +38,6 @@ describe('screen.store', function() {
         wrapper = renderer.create(
             <StoreDetails
                 getStore={jest.fn()}
-                gotStore={jest.fn()}
                 store={store}
                 loading
                 navigation={navigation}
@@ -51,12 +45,9 @@ describe('screen.store', function() {
         );
         expect(wrapper.toJSON()).toMatchSnapshot();
     });
-    test('renders correctly', function(done) {
-        process.nextTick(() => {
-            expect(wrapper.toJSON()).toMatchSnapshot();
-            global.fetch.mockClear();
-            done();
-        });
+    test('renders correctly', function() {
+        expect(wrapper.toJSON()).toMatchSnapshot();
+        global.fetch.mockClear();
     });
     test('can delete a thing', function(done) {
         process.nextTick(() => {

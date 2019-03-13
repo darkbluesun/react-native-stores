@@ -7,11 +7,52 @@ Object {
 }
 `;
 
+exports[`reducer.store should GET_STORE_BRANCHES 1`] = `
+Object {
+  "loading": true,
+}
+`;
+
+exports[`reducer.store should GET_STORE_BRANCHES_FAIL 1`] = `
+Object {
+  "error": "not found",
+  "loading": false,
+  "store": Object {
+    "id": 1,
+    "name": "store 1",
+  },
+}
+`;
+
+exports[`reducer.store should GET_STORE_FAIL 1`] = `
+Object {
+  "error": "not found",
+  "loading": false,
+  "store": Object {},
+}
+`;
+
 exports[`reducer.store should GOT_STORE 1`] = `
 Object {
   "loading": false,
   "store": Object {
     "name": "new store",
+  },
+}
+`;
+
+exports[`reducer.store should GOT_STORE_BRANCHES 1`] = `
+Object {
+  "loading": false,
+  "store": Object {
+    "branches": Array [
+      Object {
+        "id": 2,
+        "name": "store 2",
+      },
+    ],
+    "id": 1,
+    "name": "store 1",
   },
 }
 `;

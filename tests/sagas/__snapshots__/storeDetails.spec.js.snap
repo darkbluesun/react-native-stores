@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getStore should handle failure 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/store/undefined",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "ok": false,
+          "statusText": "not found",
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStore should handle failure 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "error": [Error: not found],
+    },
+    "type": "GET_STORE_FAIL",
+  },
+]
+`;
+
+exports[`getStore should handle success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/store/undefined",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "json": [Function],
+          "ok": true,
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStore should handle success 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "store": Object {
+        "id": 1,
+        "name": "store 1",
+      },
+    },
+    "type": "GOT_STORE",
+  },
+  Object {
+    "payload": Object {
+      "id": 1,
+    },
+    "type": "GET_STORE_BRANCHES",
+  },
+]
+`;
+
+exports[`getStoreBranches should handle failure 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/'store/undefined/branches",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "ok": false,
+          "statusText": "not found",
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStoreBranches should handle failure 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "error": [Error: not found],
+    },
+    "type": "GET_STORE_BRANCHES_FAIL",
+  },
+]
+`;
+
+exports[`getStoreBranches should handle success 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "http://localhost:8000/api/'store/undefined/branches",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": Promise {
+        "_40": 0,
+        "_55": Object {
+          "json": [Function],
+          "ok": true,
+        },
+        "_65": 1,
+        "_72": null,
+      },
+    },
+  ],
+}
+`;
+
+exports[`getStoreBranches should handle success 2`] = `
+Array [
+  Object {
+    "payload": Object {
+      "branches": Array [
+        Object {
+          "id": 2,
+          "name": "store 2",
+        },
+      ],
+    },
+    "type": "GOT_STORE_BRANCHES",
+  },
+]
+`;

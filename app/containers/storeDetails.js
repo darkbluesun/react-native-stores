@@ -9,7 +9,6 @@ const matchStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
     getStore: () => dispatch(getStore()),
-    gotStore: payload => dispatch(gotStore(payload)),
 });
 
 export default connect(matchStateToProps, mapDispatchToProps)(storeDetails);
